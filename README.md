@@ -1,6 +1,6 @@
 # PROYECTO 5: Aplicación de Comercio Electrónico
 
-Este proyecto está enfocado en construir una aplicación de eCommerce.
+Este proyecto está enfocado en construir una aplicación frontend de eCommerce.
 
 [Enlace al despliegue]()
 
