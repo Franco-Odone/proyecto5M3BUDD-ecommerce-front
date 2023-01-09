@@ -1,0 +1,13 @@
+:root {
+    --mainBlue: #4c4c94;
+    --lightBlue: #22bfff;
+    --mainWhite: #f5f5f5;
+    --mainDark: #45474a;
+    --mainYellow: #ffc622;
+}
+
+/* .main {
+    background-color: var(--lightBlue);
+    color: var(--mainDark);
+    height: 100vh;
+} */

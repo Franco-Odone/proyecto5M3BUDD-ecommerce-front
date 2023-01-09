@@ -1,0 +1,16 @@
+.link {
+    margin: 0 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+.link:hover {
+    color: #ffc622;
+}
+
+.link-mobile {
+    margin: 0 1rem;
+    color: #000000;
+    text-decoration: none;
+}

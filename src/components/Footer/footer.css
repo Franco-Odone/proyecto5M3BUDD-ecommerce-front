@@ -1,0 +1,12 @@
+.footer-typography {
+    color: #ffffff;
+}
+
+.footer-link {
+    color: #ffffff;
+    transition: all 0.5s;
+}
+
+.footer-link:hover {
+    color: #ffc622;
+}
