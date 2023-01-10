@@ -29,6 +29,7 @@ const Copyright = () => {
 const Footer = () => {
   return (
     <Box
+      className="footer"
       sx={{
         display: "flex",
         flexDirection: "column",

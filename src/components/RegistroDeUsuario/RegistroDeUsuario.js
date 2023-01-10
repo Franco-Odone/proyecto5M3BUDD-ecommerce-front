@@ -1,5 +1,9 @@
 const RegistroDeUsuario = () => {
-  return <p>RegistroDeUsuario</p>;
+  return (
+    <div className="registro">
+      <p>RegistroDeUsuario</p>
+    </div>
+  );
 };
 
 export { RegistroDeUsuario };

@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import "./header.css";
 
 const pages = [
@@ -23,6 +24,7 @@ const pages = [
   { page: "Registrarse", path: "/registro-de-usuario" },
   { page: "Iniciar Sesión", path: "/inicio-de-sesion" },
   { page: "Perfil", path: "/mi-perfil" },
+  { page: <ShoppingCartOutlinedIcon />, path: "/cart" },
 ];
 
 const Header = () => {
@@ -59,7 +61,7 @@ const Header = () => {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
+                color: "#ffc622",
                 textDecoration: "none",
               }}
             >
@@ -105,7 +107,6 @@ const Header = () => {
                   >
                     {page.page}
                   </Link>
-                  {/* <Typography textAlign="center">{page.page}</Typography> */}
                 </MenuItem>
               ))}
             </Menu>

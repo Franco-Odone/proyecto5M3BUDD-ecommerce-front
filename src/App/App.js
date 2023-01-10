@@ -9,25 +9,36 @@ import { InicioDeSesion } from "../components/InicioDeSesion/InicioDeSesion";
 import { MiPerfil } from "../components/MiPerfil/MiPerfil";
 import { ProductoIndividual } from "../components/ProductoIndividual/ProductoIndividual";
 import { Checkout } from "../components/Checkout/Checkout";
+import { Default } from "../components/PageNotFound/Default";
 import { Footer } from "../components/Footer/Footer";
+import { Cart } from "../components/Cart/Cart";
+import { Details } from "../components/Details/Details";
 
 function App() {
   return (
-    <>
-      <CssBaseline />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* Checkout es la ventana para pagar */}
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/registro-de-usuario" element={<RegistroDeUsuario />} />
-        <Route path="/inicio-de-sesion" element={<InicioDeSesion />} />
-        <Route path="/mi-perfil" element={<MiPerfil />} />
-        <Route path="/producto-individual" element={<ProductoIndividual />} />
-        <Route path="/listado-de-productos" element={<ListadoDeProductos />} />
-      </Routes>
+    <div className="App">
+      <div className="content-wrap">
+        <CssBaseline />
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* Checkout es la ventana para pagar */}
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/registro-de-usuario" element={<RegistroDeUsuario />} />
+          <Route path="/inicio-de-sesion" element={<InicioDeSesion />} />
+          <Route path="/mi-perfil" element={<MiPerfil />} />
+          <Route
+            path="/listado-de-productos"
+            element={<ListadoDeProductos />}
+          />
+          <Route path="/producto-individual" element={<ProductoIndividual />} />
+          <Route path="/details" element={<Details />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<Default />} />
+        </Routes>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
