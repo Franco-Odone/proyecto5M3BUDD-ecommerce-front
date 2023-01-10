@@ -7,7 +7,6 @@ import { ListadoDeProductos } from "../components/ListadoDeProductos/ListadoDePr
 import { RegistroDeUsuario } from "../components/RegistroDeUsuario/RegistroDeUsuario";
 import { InicioDeSesion } from "../components/InicioDeSesion/InicioDeSesion";
 import { MiPerfil } from "../components/MiPerfil/MiPerfil";
-import { ProductoIndividual } from "../components/ProductoIndividual/ProductoIndividual";
 import { Checkout } from "../components/Checkout/Checkout";
 import { Default } from "../components/PageNotFound/Default";
 import { Footer } from "../components/Footer/Footer";
@@ -22,18 +21,17 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* Checkout es la ventana para pagar */}
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/registro-de-usuario" element={<RegistroDeUsuario />} />
-          <Route path="/inicio-de-sesion" element={<InicioDeSesion />} />
-          <Route path="/mi-perfil" element={<MiPerfil />} />
           <Route
             path="/listado-de-productos"
             element={<ListadoDeProductos />}
           />
-          <Route path="/producto-individual" element={<ProductoIndividual />} />
-          <Route path="/details" element={<Details />} />
+          <Route path="/producto-individual-details" element={<Details />} />
+          <Route path="/registro-de-usuario" element={<RegistroDeUsuario />} />
+          <Route path="/inicio-de-sesion" element={<InicioDeSesion />} />
+          <Route path="/mi-perfil" element={<MiPerfil />} />
           <Route path="/cart" element={<Cart />} />
+          {/* Checkout es la ventana para pagar */}
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<Default />} />
         </Routes>
       </div>

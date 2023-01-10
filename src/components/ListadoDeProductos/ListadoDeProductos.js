@@ -12,12 +12,10 @@ import { ProductContext } from "../context/ProductContext";
 import { ProductoIndividual } from "../ProductoIndividual/ProductoIndividual";
 
 const ListadoDeProductos = () => {
-  // usarlo cuando tenga la base de datos
-  // const [cards, setCards] = useState([]);
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
 
-  let { storeProducts } = useContext(ProductContext);
+  let { copiaDataProductos } = useContext(ProductContext);
 
   return (
     <Box
@@ -45,8 +43,8 @@ const ListadoDeProductos = () => {
       </ThemeProvider>
       <Container sx={{ py: 0 }} maxWidth="md">
         <Grid container spacing={4}>
-          {storeProducts.map((product) => (
-            <Grid item key={crypto.randomUUID()} xs={12} sm={6} md={4}>
+          {copiaDataProductos.map((product) => (
+            <Grid item key={product.id} xs={12} sm={6} md={4}>
               <ProductoIndividual storeProducts={product} />
             </Grid>
           ))}

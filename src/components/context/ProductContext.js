@@ -1,9 +1,13 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { detailProduct, storeProducts } from "../../data";
 
 const ProductContext = createContext();
 
 const ProductContextProvider = (props) => {
+  const [copiaDataProductos, setCopiaDataProductos] = useState([
+    ...storeProducts,
+  ]);
+
   const handleDetails = () => {
     console.log("Details");
   };
@@ -12,7 +16,7 @@ const ProductContextProvider = (props) => {
   };
   return (
     <ProductContext.Provider
-      value={{ detailProduct, storeProducts, addToCart, handleDetails }}
+      value={{ detailProduct, copiaDataProductos, addToCart, handleDetails }}
     >
       {props.children}
     </ProductContext.Provider>

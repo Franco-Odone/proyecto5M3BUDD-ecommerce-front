@@ -1,4 +1,4 @@
-export const storeProducts = [
+const storeProducts = [
   {
     id: 1,
     title: "Google Pixel - Black",
@@ -89,7 +89,7 @@ export const storeProducts = [
   },
 ];
 
-export const detailProduct = {
+const detailProduct = {
   id: 1,
   title: "Google Pixel - Black",
   img: "product-1",
@@ -100,3 +100,5 @@ export const detailProduct = {
   count: 0,
   total: 0,
 };
+
+export { detailProduct, storeProducts };
