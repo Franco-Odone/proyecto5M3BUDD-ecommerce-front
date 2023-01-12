@@ -1,4 +1,5 @@
-import "./home.css";
+import { useNavigate } from "react-router-dom";
+
 import {
   Button,
   Container,
@@ -9,7 +10,8 @@ import {
   createTheme,
   ThemeProvider,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+
+import "./home.css";
 
 const Home = () => {
   let theme = createTheme();
@@ -52,9 +54,18 @@ const Home = () => {
               color: "#ffffff",
             }}
           >
-            Something short and leading about the collection below—its contents,
-            the creator, etc. Make it short and sweet, but not too short so
-            folks don&apos;t simply skip over it entirely.
+            Tenemos el mejor precio y servicio para el smartphone que buscas.
+          </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            color="text.secondary"
+            paragraph
+            sx={{
+              color: "#ffffff",
+            }}
+          >
+            Entra y lleva el tuyo!
           </Typography>
         </ThemeProvider>
         <Stack

@@ -1,3 +1,5 @@
+import { useContext } from "react";
+
 import {
   Grid,
   Typography,
@@ -7,7 +9,7 @@ import {
   createTheme,
   ThemeProvider,
 } from "@mui/material";
-import { useContext } from "react";
+
 import { ProductContext } from "../context/ProductContext";
 import { ProductoIndividual } from "../ProductoIndividual/ProductoIndividual";
 
@@ -15,7 +17,8 @@ const ListadoDeProductos = () => {
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
 
-  let { copiaDataProductos } = useContext(ProductContext);
+  let { copiaStoreProducts, handleDetails, addToCart } =
+    useContext(ProductContext);
 
   return (
     <Box
@@ -30,7 +33,6 @@ const ListadoDeProductos = () => {
           component="h2"
           variant="h2"
           align="center"
-          color="text.primary"
           sx={{
             fontWeight: "500",
             color: "#ffc622",
@@ -40,12 +42,26 @@ const ListadoDeProductos = () => {
         >
           Productos
         </Typography>
+        <Typography
+          component="h3"
+          variant="h6"
+          align="center"
+          sx={{
+            color: "#ffc622",
+          }}
+        >
+          *Para ver detalles del producto hacer click en la imágen*
+        </Typography>
       </ThemeProvider>
       <Container sx={{ py: 0 }} maxWidth="md">
         <Grid container spacing={4}>
-          {copiaDataProductos.map((product) => (
+          {copiaStoreProducts.map((product) => (
             <Grid item key={product.id} xs={12} sm={6} md={4}>
-              <ProductoIndividual storeProducts={product} />
+              <ProductoIndividual
+                addToCart={addToCart}
+                handleDetails={handleDetails}
+                copiaStoreProducts={product}
+              />
             </Grid>
           ))}
         </Grid>

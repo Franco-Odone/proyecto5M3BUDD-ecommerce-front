@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 import {
   Box,
@@ -14,12 +12,10 @@ import {
 } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-const ProductoIndividual = (props) => {
-  const [inCart, setInCart] = useState(props.storeProducts.inCart);
+import PropTypes from "prop-types";
 
-  useEffect(() => {
-    setInCart(props.storeProducts.inCart);
-  }, [props.storeProducts.inCart]);
+const ProductoIndividual = (props) => {
+  const { id, img, price, title, inCart } = props.copiaStoreProducts;
 
   return (
     <Card
@@ -33,7 +29,7 @@ const ProductoIndividual = (props) => {
       <Link
         to="/producto-individual-details"
         onClick={() => {
-          console.log("click");
+          props.handleDetails(id);
         }}
       >
         <CardMedia
@@ -41,13 +37,19 @@ const ProductoIndividual = (props) => {
           sx={{
             objectFit: "cover",
           }}
-          image={require("../../img/" + props.storeProducts.img + ".png")}
+          image={require("../../img/" + img + ".png")}
           alt="product"
         />
       </Link>
       <CardContent sx={{ flexGrow: 1, pb: "0" }}>
-        <Typography gutterBottom variant="h5" component="h2" textAlign="center">
-          {props.storeProducts.title}
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="h2"
+          textAlign="center"
+          sx={{ fontWeight: "600" }}
+        >
+          {title}
         </Typography>
       </CardContent>
       <CardActions>
@@ -59,9 +61,14 @@ const ProductoIndividual = (props) => {
         >
           <Button
             size="small"
+            sx={{
+              backgroundColor: "#dda400",
+              ":hover": { bgcolor: "#bb8200" },
+            }}
             disabled={inCart}
             onClick={() => {
               console.log("añadido al carro");
+              props.addToCart(id);
             }}
           >
             {inCart ? (
@@ -77,11 +84,12 @@ const ProductoIndividual = (props) => {
             color="text.primary"
             sx={{
               fontWeight: "500",
-              pr: "20px",
-              pt: "5px",
+              p: "10px 15px 10px 15px",
+              borderRadius: "5px",
+              backgroundColor: "#dda400",
             }}
           >
-            {`$${props.storeProducts.price}`}
+            {`$${price}`}
           </Typography>
         </Stack>
       </CardActions>
@@ -90,7 +98,7 @@ const ProductoIndividual = (props) => {
 };
 
 ProductoIndividual.propTypes = {
-  storeProducts: PropTypes.shape({
+  copiaStoreProducts: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
     img: PropTypes.string,
