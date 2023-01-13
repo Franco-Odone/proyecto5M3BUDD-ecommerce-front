@@ -29,7 +29,6 @@ const Details = () => {
   return (
     <Box
       sx={{
-        bgcolor: "#01579b",
         pt: 6,
         pb: 6,
       }}

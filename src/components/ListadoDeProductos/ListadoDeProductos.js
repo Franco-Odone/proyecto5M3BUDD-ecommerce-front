@@ -23,7 +23,6 @@ const ListadoDeProductos = () => {
   return (
     <Box
       sx={{
-        bgcolor: "#01579b",
         pt: 0,
         pb: 6,
       }}

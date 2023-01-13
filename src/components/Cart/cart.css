@@ -1,0 +1,10 @@
+.imgContainer {
+    height: 150px;
+    width: 150px;
+}
+
+.cartImg {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}

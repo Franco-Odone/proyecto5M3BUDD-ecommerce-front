@@ -16,7 +16,8 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+
+import { CartBadge } from "../CartBadge/CartBadge";
 
 import "./header.css";
 
@@ -26,7 +27,7 @@ const pages = [
   { page: "Registrarse", path: "/registro-de-usuario" },
   { page: "Iniciar Sesión", path: "/inicio-de-sesion" },
   { page: "Perfil", path: "/mi-perfil" },
-  { page: <ShoppingCartOutlinedIcon />, path: "/cart" },
+  { page: <CartBadge />, path: "/cart" },
 ];
 
 const Header = () => {
@@ -144,6 +145,7 @@ const Header = () => {
                 xs: "none",
                 md: "flex",
                 justifyContent: "space-evenly",
+                alignItems: "center",
               },
             }}
           >

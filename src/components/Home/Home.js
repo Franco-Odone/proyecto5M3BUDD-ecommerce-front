@@ -22,7 +22,6 @@ const Home = () => {
   return (
     <Box
       sx={{
-        bgcolor: "#01579b",
         height: "100vh",
         display: "flex",
         flexDirection: "column",
