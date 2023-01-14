@@ -13,6 +13,11 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+// Función para poder usar puntuación en los números
+const getNumberWithDots = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
+
 const CartTable = (props) => {
   const tableHeadValues = [
     "Productos",
@@ -52,7 +57,7 @@ const CartTable = (props) => {
                   <TableCell
                     align="left"
                     sx={{ fontWeight: "500" }}
-                  >{`$${cartItem.price}`}</TableCell>
+                  >{`$${getNumberWithDots(cartItem.price)}`}</TableCell>
                   <TableCell align="left">
                     <ButtonGroup
                       variant="contained"
@@ -74,7 +79,7 @@ const CartTable = (props) => {
                           fontWeight: "500",
                         }}
                       >
-                        {props.count}
+                        {cartItem.count}
                       </Box>
                       <Button
                         onClick={() => props.incrementInCart(cartItem.id)}
@@ -88,7 +93,7 @@ const CartTable = (props) => {
                       aria-label="delete"
                       size="large"
                       onClick={() => {
-                        props.removeItemInCart();
+                        props.removeItemInCart(cartItem.id);
                       }}
                     >
                       <DeleteIcon fontSize="inherit" />

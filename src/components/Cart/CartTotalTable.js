@@ -7,6 +7,11 @@ import {
   Paper,
 } from "@mui/material";
 
+// Función para poder usar puntuación en los números
+const getNumberWithDots = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
+
 const CartTotalTable = (props) => {
   return (
     <TableContainer component={Paper} sx={{ margin: "auto", width: "50%" }}>
@@ -14,19 +19,10 @@ const CartTotalTable = (props) => {
         <TableBody sx={{ backgroundColor: "#ffc622" }}>
           <TableRow>
             <TableCell colSpan={4} sx={{ fontWeight: "500" }}>
-              Subtotal
+              Total:
             </TableCell>
             <TableCell align="left" sx={{ fontWeight: "500" }}>
-              {`$${props.cartSubTotal}`}
-            </TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell colSpan={4} sx={{ fontWeight: "500" }}>
-              Total
-            </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "500" }}>
-              {`$${props.cartTotal}`}
+              {`$${getNumberWithDots(props.cartTotal)}`}
             </TableCell>
           </TableRow>
         </TableBody>

@@ -21,11 +21,9 @@ import "./cart.css";
 const Cart = () => {
   let {
     cartUpdate,
-    cartSubTotal,
     cartTotal,
     incrementInCart,
     decrementInCart,
-    count,
     removeItemInCart,
     clearCart,
   } = useContext(ProductContext);
@@ -60,7 +58,6 @@ const Cart = () => {
               sx={{
                 fontWeight: "500",
                 color: "#ffc622",
-                pb: "20px",
               }}
               gutterBottom
             >
@@ -71,10 +68,9 @@ const Cart = () => {
             cartUpdate={cartUpdate}
             incrementInCart={incrementInCart}
             decrementInCart={decrementInCart}
-            count={count}
             removeItemInCart={removeItemInCart}
           />
-          <CartTotalTable cartSubTotal={cartSubTotal} cartTotal={cartTotal} />
+          <CartTotalTable cartTotal={cartTotal} />
           <Button
             variant="contained"
             color="warning"

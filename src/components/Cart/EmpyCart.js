@@ -15,15 +15,11 @@ const EmptyCart = () => {
     <Box
       sx={{
         height: "100vh",
-        overflow: "auto",
         pt: 6,
         pb: 6,
       }}
     >
-      <Container
-        sx={{ width: "100%", display: "table", tableLayout: "fixed" }}
-        maxWidth="lg"
-      >
+      <Container maxWidth="lg">
         <ThemeProvider theme={theme}>
           <Typography
             component="h2"
@@ -32,9 +28,7 @@ const EmptyCart = () => {
             sx={{
               fontWeight: "500",
               color: "#ffc622",
-              pb: "20px",
             }}
-            gutterBottom
           >
             {"El carro de compras está vacío :("}
           </Typography>
