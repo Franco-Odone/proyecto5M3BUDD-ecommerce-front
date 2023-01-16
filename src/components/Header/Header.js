@@ -27,7 +27,7 @@ const pages = [
   { page: "Registrarse", path: "/registro-de-usuario" },
   { page: "Iniciar Sesión", path: "/inicio-de-sesion" },
   { page: "Perfil", path: "/mi-perfil" },
-  { page: <CartBadge />, path: "/cart" },
+  { page: <CartBadge />, path: "/cart-checkout" },
 ];
 
 const Header = () => {

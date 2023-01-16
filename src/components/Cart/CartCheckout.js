@@ -15,10 +15,11 @@ import { ProductContext } from "../context/ProductContext";
 import { EmptyCart } from "./EmpyCart";
 import { CartTable } from "./CartTable";
 import { CartTotalTable } from "./CartTotalTable";
+import { PaypalCheckoutButton } from "../Checkout/PaypalCheckoutButton";
 
 import "./cart.css";
 
-const Cart = () => {
+const CartCheckout = () => {
   let {
     cartUpdate,
     cartTotal,
@@ -76,6 +77,7 @@ const Cart = () => {
             color="warning"
             sx={{
               mt: "20px",
+              mb: "20px",
             }}
             onClick={() => {
               clearCart();
@@ -84,10 +86,16 @@ const Cart = () => {
           >
             Vaciar carro de compras
           </Button>
+          <Box sx={{ width: { md: "50%" }, m: "auto" }}>
+            <PaypalCheckoutButton
+              cartUpdate={cartUpdate}
+              cartTotal={cartTotal}
+            />
+          </Box>
         </Container>
       </Box>
     );
   }
 };
 
-export { Cart };
+export { CartCheckout };
