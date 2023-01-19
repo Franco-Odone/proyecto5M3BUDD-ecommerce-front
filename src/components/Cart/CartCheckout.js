@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 
 import {
+  Link,
   Box,
   Typography,
   Container,
@@ -15,7 +16,7 @@ import { ProductContext } from "../context/ProductContext";
 import { EmptyCart } from "./EmpyCart";
 import { CartTable } from "./CartTable";
 import { CartTotalTable } from "./CartTotalTable";
-import { PaypalCheckoutButton } from "../Checkout/PaypalCheckoutButton";
+// import { PaypalCheckoutButton } from "../Checkout/PaypalCheckoutButton";
 
 import "./cart.css";
 
@@ -86,12 +87,39 @@ const CartCheckout = () => {
           >
             Vaciar carro de compras
           </Button>
-          <Box sx={{ width: { md: "50%" }, m: "auto" }}>
+          <Box
+            className="cart-checkout"
+            sx={{ display: "flex", flexDirection: "column", mb: "15px" }}
+          >
+            <Button
+              variant="contained"
+              color="error"
+              sx={{
+                width: "35%",
+                padding: 1,
+                margin: "auto",
+              }}
+              onClick={() => {
+                clearCart();
+                navigate("/inicio-de-sesion");
+              }}
+            >
+              Inicia Sesión para ir al Checkout
+            </Button>
+            <Link
+              component={RouterLink}
+              to="/listado-de-productos"
+              sx={{ mt: "15px" }}
+            >
+              Continuar Comprando
+            </Link>
+          </Box>
+          {/* <Box sx={{ width: { md: "50%" }, m: "auto" }}>
             <PaypalCheckoutButton
               cartUpdate={cartUpdate}
               cartTotal={cartTotal}
             />
-          </Box>
+          </Box> */}
         </Container>
       </Box>
     );

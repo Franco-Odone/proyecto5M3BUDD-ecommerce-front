@@ -1,10 +1,17 @@
 import { createContext, useEffect, useState } from "react";
 
+// import { useDispatch, useSelector } from "react-redux";
+
+import { useGetAllProductsQuery } from "../../Slices/productsApi";
 import { detailProduct, storeProducts } from "../../data";
 
 const ProductContext = createContext();
 
 const ProductContextProvider = (props) => {
+  const { data, error, isLoading } = useGetAllProductsQuery();
+  // const auth = useSelector((state) => state.auth);
+  // console.log(auth);
+
   // Hago una copia estricta para mantener los valores originales de storeProducts sin modificar
   // storeProducts es para usarlo en listadoDePoductos ya que necesito todos los productos
   const [copiaStoreProducts, setCopiaStoreProducts] = useState(

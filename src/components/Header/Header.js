@@ -24,10 +24,8 @@ import "./header.css";
 const pages = [
   { page: "Home", path: "/" },
   { page: "Productos", path: "/listado-de-productos" },
-  { page: "Registrarse", path: "/registro-de-usuario" },
-  { page: "Iniciar Sesión", path: "/inicio-de-sesion" },
   { page: "Perfil", path: "/mi-perfil" },
-  { page: <CartBadge />, path: "/cart-checkout" },
+  { page: "Registrarse", path: "/registro-de-usuario" },
 ];
 
 const Header = () => {
@@ -112,6 +110,26 @@ const Header = () => {
                   </Link>
                 </MenuItem>
               ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                {/* { page: "Iniciar Sesión", path: "/inicio-de-sesion" }, */}
+                <Link
+                  className="link-mobile"
+                  to={"/inicio-de-sesion"}
+                  onClick={handleCloseNavMenu}
+                >
+                  Iniciar Sesión
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                {/* { page: <CartBadge />, path: "/cart-checkout" }, */}
+                <Link
+                  className="link-mobile"
+                  to={"/cart-checkout"}
+                  onClick={handleCloseNavMenu}
+                >
+                  <CartBadge />
+                </Link>
+              </MenuItem>
             </Menu>
           </Box>
           {/* Big Screens */}
@@ -159,6 +177,22 @@ const Header = () => {
                 {page.page}
               </Link>
             ))}
+            {/* { page: "Iniciar Sesión", path: "/inicio-de-sesion" }, */}
+            <Link
+              className="link"
+              to={"/inicio-de-sesion"}
+              onClick={handleCloseNavMenu}
+            >
+              Inicio de Sesión
+            </Link>
+            {/* { page: <CartBadge />, path: "/cart-checkout" }, */}
+            <Link
+              className="link"
+              to={"/cart-checkout"}
+              onClick={handleCloseNavMenu}
+            >
+              <CartBadge />
+            </Link>
           </Box>
         </Toolbar>
       </Container>

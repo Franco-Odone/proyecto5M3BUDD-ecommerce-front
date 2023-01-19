@@ -11,19 +11,30 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../Slices/authSlice";
 
 const RegistroDeUsuario = () => {
+  const dispatch = useDispatch();
+
+  const auth = useSelector((state) => state.auth);
+  console.log(auth);
+
   const theme = createTheme();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    dispatch(
+      registerUser({
+        username: data.get("username"),
+        email: data.get("email"),
+        password: data.get("password"),
+      })
+    );
+
+    event.target.reset();
   };
 
   return (
@@ -51,25 +62,25 @@ const RegistroDeUsuario = () => {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="username"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="username"
+                  label="Nombre de usuario"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  InputLabelProps={{
+                    style: {
+                      color: "#000000",
+                      fontWeight: "500",
+                    },
+                  }}
+                  sx={{
+                    bgcolor: "#ffffff",
+                    borderRadius: "5px",
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -77,9 +88,19 @@ const RegistroDeUsuario = () => {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   autoComplete="email"
+                  InputLabelProps={{
+                    style: {
+                      color: "#000000",
+                      fontWeight: "500",
+                    },
+                  }}
+                  sx={{
+                    bgcolor: "#ffffff",
+                    borderRadius: "5px",
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -87,10 +108,20 @@ const RegistroDeUsuario = () => {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="Contraseña"
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  InputLabelProps={{
+                    style: {
+                      color: "#000000",
+                      fontWeight: "500",
+                    },
+                  }}
+                  sx={{
+                    bgcolor: "#ffffff",
+                    borderRadius: "5px",
+                  }}
                 />
               </Grid>
             </Grid>
@@ -100,9 +131,23 @@ const RegistroDeUsuario = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Regístrate
+              {auth.registerStatus === "pending"
+                ? "Registrando los datos..."
+                : "Regístrate"}
             </Button>
           </Box>
+          {auth.registerStatus === "rejected" && (
+            <Typography
+              sx={{
+                color: "#ffffff",
+                backgroundColor: "#c62828",
+                borderRadius: "5px",
+                padding: "5px",
+              }}
+            >
+              {auth.registerError}
+            </Typography>
+          )}
         </Box>
       </Container>
     </ThemeProvider>
