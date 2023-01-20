@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   Avatar,
   Button,
@@ -11,14 +15,18 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../Slices/authSlice";
+
+import { registerUser } from "../../slices/authSlice";
 
 const RegistroDeUsuario = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
   console.log(auth);
+
+  useEffect(() => {
+    auth._id && navigate("/cart-checkout");
+  }, [auth._id, navigate]);
 
   const theme = createTheme();
 

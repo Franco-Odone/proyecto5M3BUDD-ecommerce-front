@@ -1,25 +1,27 @@
 import { createContext, useEffect, useState } from "react";
 
-// import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { useGetAllProductsQuery } from "../../Slices/productsApi";
-import { detailProduct, storeProducts } from "../../data";
+import { detailProduct } from "../../data";
 
 const ProductContext = createContext();
 
 const ProductContextProvider = (props) => {
-  const { data, error, isLoading } = useGetAllProductsQuery();
-  // const auth = useSelector((state) => state.auth);
-  // console.log(auth);
+  const { items: data, status } = useSelector((state) => state.products);
 
-  // Hago una copia estricta para mantener los valores originales de storeProducts sin modificar
+  // Hago una copia estricta para para poder modificar una propiedad del state proveniente del redux slice
+  // desde donde se hace el fetch de los productos
   // storeProducts es para usarlo en listadoDePoductos ya que necesito todos los productos
   const [copiaStoreProducts, setCopiaStoreProducts] = useState(
-    JSON.parse(JSON.stringify(storeProducts))
+    JSON.parse(JSON.stringify(data))
   );
 
+  useEffect(() => {
+    setCopiaStoreProducts(JSON.parse(JSON.stringify(data)));
+  }, [data, status]);
+
   // detailProduct es para usarlo en Details ya que necesito un solo producto
-  const [copiaDetailProduct, setCopiaDetailProducts] = useState({
+  const [copiaDetailProduct, setCopiaDetailProduct] = useState({
     ...detailProduct,
   });
 
@@ -31,7 +33,7 @@ const ProductContextProvider = (props) => {
   // Funciones
   const getItem = (id) => {
     let tempProducts = [...copiaStoreProducts];
-    let product = tempProducts.find((item) => item.id === id);
+    let product = tempProducts.find((item) => item._id === id);
     return product;
   };
 
@@ -40,7 +42,7 @@ const ProductContextProvider = (props) => {
     let tempProducts = [...copiaStoreProducts];
     let index = tempProducts.indexOf(getItem(id));
     let product = tempProducts[index];
-    setCopiaDetailProducts(product);
+    setCopiaDetailProduct(product);
   };
 
   const addToCart = (id) => {
@@ -58,7 +60,7 @@ const ProductContextProvider = (props) => {
 
   const incrementInCart = (id) => {
     let tempCart = [...cartUpdate];
-    let selectedProduct = tempCart.find((item) => item.id === id);
+    let selectedProduct = tempCart.find((item) => item._id === id);
     let index = tempCart.indexOf(selectedProduct);
     let product = tempCart[index];
 
@@ -70,7 +72,7 @@ const ProductContextProvider = (props) => {
 
   const decrementInCart = (id) => {
     let tempCart = [...cartUpdate];
-    let selectedProduct = tempCart.find((item) => item.id === id);
+    let selectedProduct = tempCart.find((item) => item._id === id);
     let index = tempCart.indexOf(selectedProduct);
     let product = tempCart[index];
 
@@ -86,7 +88,7 @@ const ProductContextProvider = (props) => {
     let index = tempProducts.indexOf(getItem(id));
     let removedProduct = tempProducts[index];
     let tempCart = [...cartUpdate];
-    tempCart = tempCart.filter((item) => item.id !== id);
+    tempCart = tempCart.filter((item) => item._id !== id);
 
     removedProduct.inCart = false;
     removedProduct.count = 0;
@@ -96,7 +98,6 @@ const ProductContextProvider = (props) => {
     setCartUpdate(tempCart);
   };
 
-  // useEffect
   useEffect(() => {
     // Función para calcular el valor total del Cart con todos los productos y sus cantidades respectivas
     const addCartTotal = () => {
@@ -110,13 +111,14 @@ const ProductContextProvider = (props) => {
 
   const clearCart = () => {
     // copia estricta de storeProducts para volver todos los valores a su estado original
-    setCopiaStoreProducts(JSON.parse(JSON.stringify(storeProducts)));
+    setCopiaStoreProducts(JSON.parse(JSON.stringify(data)));
     setCartUpdate([]);
   };
 
   return (
     <ProductContext.Provider
       value={{
+        status,
         cartUpdate,
         cartTotal,
         copiaDetailProduct,

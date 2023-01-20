@@ -21,7 +21,7 @@ import { ProductContext } from "../context/ProductContext";
 
 const Details = () => {
   let { copiaDetailProduct, addToCart } = useContext(ProductContext);
-  const { id, company, img, info, price, title, inCart } = copiaDetailProduct;
+  const { _id, company, img, info, price, title, inCart } = copiaDetailProduct;
 
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
@@ -93,7 +93,7 @@ const Details = () => {
                     disabled={inCart}
                     onClick={() => {
                       console.log("añadido al carro");
-                      addToCart(id);
+                      addToCart(_id);
                     }}
                   >
                     {inCart ? (

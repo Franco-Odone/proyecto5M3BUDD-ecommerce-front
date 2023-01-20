@@ -15,7 +15,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import PropTypes from "prop-types";
 
 const ProductoIndividual = (props) => {
-  const { id, img, price, title, inCart } = props.copiaStoreProducts;
+  const { _id, img, price, title, inCart } = props.copiaStoreProducts;
 
   return (
     <Card
@@ -29,7 +29,8 @@ const ProductoIndividual = (props) => {
       <Link
         to="/producto-individual-details"
         onClick={() => {
-          props.handleDetails(id);
+          props.handleDetails(_id);
+          // localStorage.setItem("ProductDetailId", _id);
         }}
       >
         <CardMedia
@@ -68,7 +69,7 @@ const ProductoIndividual = (props) => {
             disabled={inCart}
             onClick={() => {
               console.log("añadido al carro");
-              props.addToCart(id);
+              props.addToCart(_id);
             }}
           >
             {inCart ? (
@@ -99,7 +100,7 @@ const ProductoIndividual = (props) => {
 
 ProductoIndividual.propTypes = {
   copiaStoreProducts: PropTypes.shape({
-    id: PropTypes.number,
+    _id: PropTypes.string,
     title: PropTypes.string,
     img: PropTypes.string,
     price: PropTypes.number,

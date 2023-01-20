@@ -42,7 +42,7 @@ const CartTable = (props) => {
             </TableHead>
             <TableBody sx={{ backgroundColor: "#ffc622" }}>
               {props.cartUpdate.map((cartItem) => (
-                <TableRow key={cartItem.id}>
+                <TableRow key={cartItem._id}>
                   <TableCell align="left" className="imgContainer">
                     <img
                       className="cartImg"
@@ -67,7 +67,7 @@ const CartTable = (props) => {
                       }}
                     >
                       <Button
-                        onClick={() => props.decrementInCart(cartItem.id)}
+                        onClick={() => props.decrementInCart(cartItem._id)}
                       >
                         -
                       </Button>
@@ -82,7 +82,7 @@ const CartTable = (props) => {
                         {cartItem.count}
                       </Box>
                       <Button
-                        onClick={() => props.incrementInCart(cartItem.id)}
+                        onClick={() => props.incrementInCart(cartItem._id)}
                       >
                         +
                       </Button>
@@ -93,7 +93,7 @@ const CartTable = (props) => {
                       aria-label="delete"
                       size="large"
                       onClick={() => {
-                        props.removeItemInCart(cartItem.id);
+                        props.removeItemInCart(cartItem._id);
                       }}
                     >
                       <DeleteIcon fontSize="inherit" />

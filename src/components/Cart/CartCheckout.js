@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import {
   Link,
@@ -16,11 +17,16 @@ import { ProductContext } from "../context/ProductContext";
 import { EmptyCart } from "./EmpyCart";
 import { CartTable } from "./CartTable";
 import { CartTotalTable } from "./CartTotalTable";
-// import { PaypalCheckoutButton } from "../Checkout/PaypalCheckoutButton";
+import { PaypalCheckoutButton } from "../Checkout/PaypalCheckoutButton";
 
 import "./cart.css";
 
 const CartCheckout = () => {
+  const auth = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  let theme = createTheme();
+  theme = responsiveFontSizes(theme);
+
   let {
     cartUpdate,
     cartTotal,
@@ -29,11 +35,6 @@ const CartCheckout = () => {
     removeItemInCart,
     clearCart,
   } = useContext(ProductContext);
-
-  const navigate = useNavigate();
-
-  let theme = createTheme();
-  theme = responsiveFontSizes(theme);
 
   if (cartUpdate.length === 0) {
     return <EmptyCart />;
@@ -91,21 +92,29 @@ const CartCheckout = () => {
             className="cart-checkout"
             sx={{ display: "flex", flexDirection: "column", mb: "15px" }}
           >
-            <Button
-              variant="contained"
-              color="error"
-              sx={{
-                width: "35%",
-                padding: 1,
-                margin: "auto",
-              }}
-              onClick={() => {
-                clearCart();
-                navigate("/inicio-de-sesion");
-              }}
-            >
-              Inicia Sesión para ir al Checkout
-            </Button>
+            {auth._id ? (
+              <Box sx={{ width: { md: "50%" }, m: "auto" }}>
+                <PaypalCheckoutButton
+                  cartUpdate={cartUpdate}
+                  cartTotal={cartTotal}
+                />
+              </Box>
+            ) : (
+              <Button
+                variant="contained"
+                color="error"
+                sx={{
+                  width: "35%",
+                  padding: 1,
+                  margin: "auto",
+                }}
+                onClick={() => {
+                  navigate("/inicio-de-sesion");
+                }}
+              >
+                Inicia Sesión para ir al Checkout
+              </Button>
+            )}
             <Link
               component={RouterLink}
               to="/listado-de-productos"
@@ -114,12 +123,6 @@ const CartCheckout = () => {
               Continuar Comprando
             </Link>
           </Box>
-          {/* <Box sx={{ width: { md: "50%" }, m: "auto" }}>
-            <PaypalCheckoutButton
-              cartUpdate={cartUpdate}
-              cartTotal={cartTotal}
-            />
-          </Box> */}
         </Container>
       </Box>
     );

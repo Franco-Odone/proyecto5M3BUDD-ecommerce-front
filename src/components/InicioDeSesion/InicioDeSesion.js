@@ -1,28 +1,49 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Box,
   Typography,
   Container,
   createTheme,
   ThemeProvider,
 } from "@mui/material";
+
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+
+import { loadUser, loginUser } from "../../slices/authSlice";
 
 const theme = createTheme();
 
+// Login
 const InicioDeSesion = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    auth._id && navigate("/cart-checkout");
+  }, [auth._id, navigate]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    dispatch(
+      loginUser({
+        email: data.get("email"),
+        password: data.get("password"),
+      })
+    );
+
+    dispatch(loadUser(null));
+
+    event.target.reset();
   };
 
   return (
@@ -54,24 +75,40 @@ const InicioDeSesion = () => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Email"
               name="email"
               autoComplete="email"
               autoFocus
+              InputLabelProps={{
+                style: {
+                  color: "#000000",
+                  fontWeight: "500",
+                },
+              }}
+              sx={{
+                bgcolor: "#ffffff",
+                borderRadius: "5px",
+              }}
             />
             <TextField
               margin="normal"
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Contraseña"
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              InputLabelProps={{
+                style: {
+                  color: "#000000",
+                  fontWeight: "500",
+                },
+              }}
+              sx={{
+                bgcolor: "#ffffff",
+                borderRadius: "5px",
+              }}
             />
             <Button
               type="submit"
@@ -79,9 +116,23 @@ const InicioDeSesion = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Inicia Sesión
+              {auth.loginStatus === "pending"
+                ? "Registrando los datos..."
+                : "Inicia Sesión"}
             </Button>
           </Box>
+          {auth.loginStatus === "rejected" && (
+            <Typography
+              sx={{
+                color: "#ffffff",
+                backgroundColor: "#c62828",
+                borderRadius: "5px",
+                padding: "5px",
+              }}
+            >
+              {auth.loginError}
+            </Typography>
+          )}
         </Box>
       </Container>
     </ThemeProvider>

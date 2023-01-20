@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   AppBar,
@@ -18,17 +19,20 @@ import MenuIcon from "@mui/icons-material/Menu";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 
 import { CartBadge } from "../CartBadge/CartBadge";
+import { logoutUser } from "../../slices/authSlice";
 
 import "./header.css";
 
 const pages = [
   { page: "Home", path: "/" },
   { page: "Productos", path: "/listado-de-productos" },
-  { page: "Perfil", path: "/mi-perfil" },
-  { page: "Registrarse", path: "/registro-de-usuario" },
 ];
 
 const Header = () => {
+  // A hook to access the redux dispatch function.
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
 
@@ -40,6 +44,10 @@ const Header = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleLogOut = () => {
+    dispatch(logoutUser(null));
   };
 
   return (
@@ -112,13 +120,23 @@ const Header = () => {
               ))}
               <MenuItem onClick={handleCloseNavMenu}>
                 {/* { page: "Iniciar Sesión", path: "/inicio-de-sesion" }, */}
-                <Link
-                  className="link-mobile"
-                  to={"/inicio-de-sesion"}
-                  onClick={handleCloseNavMenu}
-                >
-                  Iniciar Sesión
-                </Link>
+                {auth._id ? (
+                  <Link
+                    className="link-mobile"
+                    // to={"/cerrar-sesion"}
+                    onClick={handleLogOut}
+                  >
+                    Cerrar Sesión
+                  </Link>
+                ) : (
+                  <Link
+                    className="link-mobile"
+                    to={"/inicio-de-sesion"}
+                    onClick={handleCloseNavMenu}
+                  >
+                    Iniciar Sesión
+                  </Link>
+                )}
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 {/* { page: <CartBadge />, path: "/cart-checkout" }, */}
@@ -177,14 +195,41 @@ const Header = () => {
                 {page.page}
               </Link>
             ))}
-            {/* { page: "Iniciar Sesión", path: "/inicio-de-sesion" }, */}
-            <Link
-              className="link"
-              to={"/inicio-de-sesion"}
-              onClick={handleCloseNavMenu}
-            >
-              Inicio de Sesión
-            </Link>
+            {auth._id ? (
+              <>
+                {/* { page: "Perfil", path: "/mi-perfil" } */}
+                <Link
+                  className="link"
+                  to={"/mi-perfil"}
+                  onClick={handleCloseNavMenu}
+                >
+                  Perfil
+                </Link>
+                <Link className="link" onClick={handleLogOut}>
+                  Cerrar Sesión
+                </Link>
+              </>
+            ) : (
+              <>
+                {/* { page: "Registrarse", path: "/registro-de-usuario" }, */}
+                <Link
+                  className="link"
+                  to={"/registro-de-usuario"}
+                  onClick={handleCloseNavMenu}
+                >
+                  Registrarse
+                </Link>
+                {/* { page: "Iniciar Sesión", path: "/inicio-de-sesion" }, */}
+                <Link
+                  className="link"
+                  to={"/inicio-de-sesion"}
+                  onClick={handleCloseNavMenu}
+                >
+                  Inicio de Sesión
+                </Link>
+              </>
+            )}
+
             {/* { page: <CartBadge />, path: "/cart-checkout" }, */}
             <Link
               className="link"

@@ -17,11 +17,13 @@ const initialState = {
   userLoaded: false,
 };
 
-// Action
+// Actions
+// Al hacer un registro se inicia sesión en este caso ya que tembién se extrae y se pasa el _id desde el token
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (values, { rejectWithValue }) => {
     try {
+      // El token es una referencia (un identificador) que regresa a los datos sensibles a través de un sistema de tokenización
       const resToken = await axios.post("http://localhost:3000/users", {
         username: values.username,
         email: values.email,
@@ -33,7 +35,28 @@ export const registerUser = createAsyncThunk(
       return resToken.data.token;
     } catch (err) {
       console.log(err);
-    //   err.response.data = "Por favor completar todos los campos...";
+      //   err.response.data = "Por favor completar todos los campos...";
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async (values, { rejectWithValue }) => {
+    try {
+      // El token es una referencia (un identificador) que regresa a los datos sensibles a través de un sistema de tokenización
+      const resToken = await axios.post("http://localhost:3000/auth/login", {
+        email: values.email,
+        password: values.password,
+      });
+
+      localStorage.setItem("token", resToken.data.token);
+
+      return resToken.data.token;
+    } catch (err) {
+      console.log(err);
+      //   err.response.data = "Por favor completar todos los campos...";
       return rejectWithValue(err.response.data);
     }
   }
@@ -42,8 +65,43 @@ export const registerUser = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    // Es necesario llamar a esta acción en algún lugar en su código para que se ejecute y actualice el estado de la aplicación.
+    loadUser(state, action) {
+      const token = state.token;
+
+      if (token) {
+        const user = jwtDecode(token);
+
+        return {
+          ...state,
+          token,
+          username: user.username,
+          email: user.email,
+          _id: user._id,
+          userLoaded: true,
+        };
+      }
+    },
+    logoutUser(state, action) {
+      localStorage.removeItem("token");
+
+      return {
+        ...state,
+        token: "",
+        username: "",
+        email: "",
+        _id: "",
+        registerStatus: "",
+        registerError: "",
+        loginStatus: "",
+        loginError: "",
+        userLoaded: false,
+      };
+    },
+  },
   extraReducers: (builder) => {
+    // Register
     builder.addCase(registerUser.pending, (state, action) => {
       return { ...state, registerStatus: "pending" };
     });
@@ -68,7 +126,34 @@ const authSlice = createSlice({
         registerError: action.payload,
       };
     });
+    // Login
+    builder.addCase(loginUser.pending, (state, action) => {
+      return { ...state, loginStatus: "pending" };
+    });
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      if (action.payload) {
+        const user = jwtDecode(action.payload);
+        return {
+          ...state,
+          token: action.payload,
+          username: user.username,
+          email: user.email,
+          _id: user._id,
+          loginStatus: "success",
+        };
+      } else return state;
+    });
+    builder.addCase(loginUser.rejected, (state, action) => {
+      console.log(action);
+      return {
+        ...state,
+        loginStatus: "rejected",
+        loginError: action.payload,
+      };
+    });
   },
 });
+
+export const { loadUser, logoutUser } = authSlice.actions;
 
 export default authSlice.reducer;
