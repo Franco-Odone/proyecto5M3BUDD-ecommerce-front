@@ -20,7 +20,7 @@ const ProductContextProvider = (props) => {
     setCopiaStoreProducts(JSON.parse(JSON.stringify(data)));
   }, [data, status]);
 
-  // detailProduct es para usarlo en Details ya que necesito un solo producto
+  // detailProduct es un objeto por defecto para usarlo en Details y hacer una validación
   const [copiaDetailProduct, setCopiaDetailProduct] = useState({
     ...detailProduct,
   });

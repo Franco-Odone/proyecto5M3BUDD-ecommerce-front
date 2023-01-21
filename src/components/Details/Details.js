@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
@@ -22,6 +23,11 @@ import { ProductContext } from "../context/ProductContext";
 const Details = () => {
   let { copiaDetailProduct, addToCart } = useContext(ProductContext);
   const { _id, company, img, info, price, title, inCart } = copiaDetailProduct;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    _id === 1 && navigate("/cart-checkout");
+  }, [_id, navigate]);
 
   let theme = createTheme();
   theme = responsiveFontSizes(theme);

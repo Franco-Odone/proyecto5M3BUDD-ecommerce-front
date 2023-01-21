@@ -118,28 +118,46 @@ const Header = () => {
                   </Link>
                 </MenuItem>
               ))}
+              {auth._id ? (
+                <Box>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Link
+                      className="link-mobile"
+                      to={"/mi-perfil"}
+                      onClick={handleCloseNavMenu}
+                    >
+                      Perfil
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Link className="link-mobile" onClick={handleLogOut}>
+                      Cerrar Sesión
+                    </Link>
+                  </MenuItem>
+                </Box>
+              ) : (
+                <Box>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Link
+                      className="link-mobile"
+                      to={"/registro-de-usuario"}
+                      onClick={handleCloseNavMenu}
+                    >
+                      Registrarse
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Link
+                      className="link-mobile"
+                      to={"/inicio-de-sesion"}
+                      onClick={handleCloseNavMenu}
+                    >
+                      Iniciar Sesión
+                    </Link>
+                  </MenuItem>
+                </Box>
+              )}
               <MenuItem onClick={handleCloseNavMenu}>
-                {/* { page: "Iniciar Sesión", path: "/inicio-de-sesion" }, */}
-                {auth._id ? (
-                  <Link
-                    className="link-mobile"
-                    // to={"/cerrar-sesion"}
-                    onClick={handleLogOut}
-                  >
-                    Cerrar Sesión
-                  </Link>
-                ) : (
-                  <Link
-                    className="link-mobile"
-                    to={"/inicio-de-sesion"}
-                    onClick={handleCloseNavMenu}
-                  >
-                    Iniciar Sesión
-                  </Link>
-                )}
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                {/* { page: <CartBadge />, path: "/cart-checkout" }, */}
                 <Link
                   className="link-mobile"
                   to={"/cart-checkout"}
@@ -197,7 +215,6 @@ const Header = () => {
             ))}
             {auth._id ? (
               <>
-                {/* { page: "Perfil", path: "/mi-perfil" } */}
                 <Link
                   className="link"
                   to={"/mi-perfil"}
@@ -211,7 +228,6 @@ const Header = () => {
               </>
             ) : (
               <>
-                {/* { page: "Registrarse", path: "/registro-de-usuario" }, */}
                 <Link
                   className="link"
                   to={"/registro-de-usuario"}
@@ -219,18 +235,15 @@ const Header = () => {
                 >
                   Registrarse
                 </Link>
-                {/* { page: "Iniciar Sesión", path: "/inicio-de-sesion" }, */}
                 <Link
                   className="link"
                   to={"/inicio-de-sesion"}
                   onClick={handleCloseNavMenu}
                 >
-                  Inicio de Sesión
+                  Iniciar Sesión
                 </Link>
               </>
             )}
-
-            {/* { page: <CartBadge />, path: "/cart-checkout" }, */}
             <Link
               className="link"
               to={"/cart-checkout"}
