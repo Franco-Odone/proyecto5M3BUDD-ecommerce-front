@@ -22,7 +22,6 @@ const RegistroDeUsuario = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
-  console.log(auth);
 
   useEffect(() => {
     auth._id && navigate("/cart-checkout");

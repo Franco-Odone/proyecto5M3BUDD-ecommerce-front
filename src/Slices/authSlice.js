@@ -17,7 +17,20 @@ const initialState = {
   userLoaded: false,
 };
 
-// Actions
+const translate = async (fromText) => {
+  const inputLanguage = "en-US";
+  const outputLanguage = "es-ES";
+  const url = `https://api.mymemory.translated.net/get?q=${fromText}!&langpair=${inputLanguage}|${outputLanguage}`;
+  return await fetch(url)
+    .then((response) => response.json())
+    .then((json) => {
+      return json.responseData.translatedText;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 // Al hacer un registro se inicia sesión en este caso ya que tembién se extrae y se pasa el _id desde el token
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
@@ -34,9 +47,12 @@ export const registerUser = createAsyncThunk(
 
       return resToken.data.token;
     } catch (err) {
-      console.log(err);
-      //   err.response.data = "Por favor completar todos los campos...";
-      return rejectWithValue(err.response.data);
+      let translatedMessage = await translate(err.response.data).then(
+        (data) => {
+          return data;
+        }
+      );
+      return rejectWithValue(translatedMessage);
     }
   }
 );
@@ -55,9 +71,12 @@ export const loginUser = createAsyncThunk(
 
       return resToken.data.token;
     } catch (err) {
-      console.log(err);
-      //   err.response.data = "Por favor completar todos los campos...";
-      return rejectWithValue(err.response.data);
+      let translatedMessage = await translate(err.response.data).then(
+        (data) => {
+          return data;
+        }
+      );
+      return rejectWithValue(translatedMessage);
     }
   }
 );
@@ -106,6 +125,8 @@ const authSlice = createSlice({
       return { ...state, registerStatus: "pending" };
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
+      // cuándo el reducer está fulfilled en el payload viene el token
+      console.log(action);
       if (action.payload) {
         const user = jwtDecode(action.payload);
         return {

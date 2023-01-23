@@ -23,6 +23,7 @@ function App() {
       options={{
         "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
         components: "buttons",
+        currency: "USD",
       }}
     >
       <div className="App">

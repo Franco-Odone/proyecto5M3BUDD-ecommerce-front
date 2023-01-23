@@ -9,6 +9,9 @@ const ProductContext = createContext();
 const ProductContextProvider = (props) => {
   const { items: data, status } = useSelector((state) => state.products);
 
+  // state para actualizar perfil de usuario
+  const [updateUserProfile, setUpdateUserProfile] = useState([]);
+
   // Hago una copia estricta para para poder modificar una propiedad del state proveniente del redux slice
   // desde donde se hace el fetch de los productos
   // storeProducts es para usarlo en listadoDePoductos ya que necesito todos los productos
@@ -123,6 +126,8 @@ const ProductContextProvider = (props) => {
         cartTotal,
         copiaDetailProduct,
         copiaStoreProducts,
+        updateUserProfile,
+        setUpdateUserProfile,
         handleDetails,
         addToCart,
         incrementInCart,

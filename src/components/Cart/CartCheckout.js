@@ -97,6 +97,7 @@ const CartCheckout = () => {
                 <PaypalCheckoutButton
                   cartUpdate={cartUpdate}
                   cartTotal={cartTotal}
+                  clearCart={clearCart}
                 />
               </Box>
             ) : (
