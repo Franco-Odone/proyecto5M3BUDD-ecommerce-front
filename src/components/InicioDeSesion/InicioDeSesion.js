@@ -16,7 +16,7 @@ import {
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-import { loadUser, loginUser } from "../../slices/authSlice";
+import { loadUser, loginUser } from "../../slicesDirectory/authSlice";
 
 const theme = createTheme();
 

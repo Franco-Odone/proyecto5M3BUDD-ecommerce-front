@@ -7,8 +7,10 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 // // Se puede cambiar el nombre ya que el default export es en realidad un reducer
-import authReducer, { logoutUser, loadUser } from "./slices/authSlice";
-import productsReducer, { productsFetch } from "./slices/productsSlice";
+import authReducer, { logoutUser, loadUser } from "./slicesDirectory/authSlice";
+import productsReducer, {
+  productsFetch,
+} from "./slicesDirectory/productsSlice";
 // import { productsApi } from "./slices/productsApi";
 
 import { ProductContextProvider } from "./components/context/ProductContext";

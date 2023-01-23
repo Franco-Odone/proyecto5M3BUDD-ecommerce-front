@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-import { registerUser } from "../../slices/authSlice";
+import { registerUser } from "../../slicesDirectory/authSlice";
 
 const RegistroDeUsuario = () => {
   const dispatch = useDispatch();

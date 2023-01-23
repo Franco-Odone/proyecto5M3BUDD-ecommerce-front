@@ -37,7 +37,7 @@ export const registerUser = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     try {
       // El token es una referencia (un identificador) que regresa a los datos sensibles a través de un sistema de tokenización
-      const resToken = await axios.post("http://localhost:3000/users", {
+      const resToken = await axios.post("http://localhost:3001/users", {
         username: values.username,
         email: values.email,
         password: values.password,
@@ -62,7 +62,7 @@ export const loginUser = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     try {
       // El token es una referencia (un identificador) que regresa a los datos sensibles a través de un sistema de tokenización
-      const resToken = await axios.post("http://localhost:3000/auth/login", {
+      const resToken = await axios.post("http://localhost:3001/auth/login", {
         email: values.email,
         password: values.password,
       });

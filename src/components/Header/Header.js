@@ -19,7 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 
 import { CartBadge } from "../CartBadge/CartBadge";
-import { logoutUser } from "../../slices/authSlice";
+import { logoutUser } from "../../slicesDirectory/authSlice";
 
 import "./header.css";
 
