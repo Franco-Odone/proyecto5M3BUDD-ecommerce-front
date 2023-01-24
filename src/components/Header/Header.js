@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -20,6 +20,7 @@ import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 
 import { CartBadge } from "../CartBadge/CartBadge";
 import { logoutUser } from "../../slicesDirectory/authSlice";
+import { ProductContext } from "../context/ProductContext";
 
 import "./header.css";
 
@@ -29,6 +30,8 @@ const pages = [
 ];
 
 const Header = () => {
+  let { setUpdateUserProfile } = useContext(ProductContext);
+
   // A hook to access the redux dispatch function.
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -48,6 +51,7 @@ const Header = () => {
 
   const handleLogOut = () => {
     dispatch(logoutUser(null));
+    setUpdateUserProfile([]);
   };
 
   return (

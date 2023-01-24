@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  Link,
   Avatar,
   Button,
   CssBaseline,
@@ -66,12 +67,17 @@ const RegistroDeUsuario = () => {
             component="form"
             noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
+            sx={{
+              mt: 3,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  autoComplete="given-name"
+                  autoComplete="off"
                   name="username"
                   required
                   fullWidth
@@ -97,7 +103,7 @@ const RegistroDeUsuario = () => {
                   id="email"
                   label="Email"
                   name="email"
-                  autoComplete="email"
+                  autoComplete="off"
                   InputLabelProps={{
                     style: {
                       color: "#000000",
@@ -118,7 +124,7 @@ const RegistroDeUsuario = () => {
                   label="Contraseña"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
+                  autoComplete="off"
                   InputLabelProps={{
                     style: {
                       color: "#000000",
@@ -142,6 +148,18 @@ const RegistroDeUsuario = () => {
                 ? "Registrando los datos..."
                 : "Regístrate"}
             </Button>
+            <Link
+              component={RouterLink}
+              className="link"
+              to={"/inicio-de-sesion"}
+              sx={{
+                color: "#ffc622",
+                textAlign: "center",
+                m: "auto",
+              }}
+            >
+              Si ya estás registrado/a, haz click acá!
+            </Link>
           </Box>
           {auth.registerStatus === "rejected" && (
             <Typography

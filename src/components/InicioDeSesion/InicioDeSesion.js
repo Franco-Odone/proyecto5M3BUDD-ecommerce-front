@@ -1,8 +1,10 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  Link,
   Avatar,
   Button,
   CssBaseline,
@@ -68,7 +70,12 @@ const InicioDeSesion = () => {
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
+            sx={{
+              mt: 1,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
             <TextField
               margin="normal"
@@ -77,7 +84,7 @@ const InicioDeSesion = () => {
               id="email"
               label="Email"
               name="email"
-              autoComplete="email"
+              autoComplete="off"
               autoFocus
               InputLabelProps={{
                 style: {
@@ -98,7 +105,7 @@ const InicioDeSesion = () => {
               label="Contraseña"
               type="password"
               id="password"
-              autoComplete="current-password"
+              autoComplete="off"
               InputLabelProps={{
                 style: {
                   color: "#000000",
@@ -120,6 +127,17 @@ const InicioDeSesion = () => {
                 ? "Registrando los datos..."
                 : "Inicia Sesión"}
             </Button>
+            <Link
+              component={RouterLink}
+              className="link"
+              to={"/registro-de-usuario"}
+              sx={{
+                color: "#ffc622",
+                textAlign: "center",
+              }}
+            >
+              Si no estás registrado/a, hazlo dando click acá!
+            </Link>
           </Box>
           {auth.loginStatus === "rejected" && (
             <Typography
