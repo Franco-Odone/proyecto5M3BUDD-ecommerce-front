@@ -22,6 +22,8 @@ import { CartBadge } from "../CartBadge/CartBadge";
 import { logoutUser } from "../../slicesDirectory/authSlice";
 import { ProductContext } from "../context/ProductContext";
 
+import { toast } from "react-toastify";
+
 import "./header.css";
 
 const pages = [
@@ -52,6 +54,16 @@ const Header = () => {
   const handleLogOut = () => {
     dispatch(logoutUser(null));
     setUpdateUserProfile([]);
+    toast.error("Sesión cerrada", {
+      position: "bottom-right",
+      autoClose: 6000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   };
 
   return (

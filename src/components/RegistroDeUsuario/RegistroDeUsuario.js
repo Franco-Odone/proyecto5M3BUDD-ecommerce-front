@@ -17,18 +17,36 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
+import { toast } from "react-toastify";
+
 import { registerUser } from "../../slicesDirectory/authSlice";
 
 const RegistroDeUsuario = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
+  const theme = createTheme();
 
   useEffect(() => {
     auth._id && navigate("/cart-checkout");
   }, [auth._id, navigate]);
 
-  const theme = createTheme();
+  useEffect(() => {
+    auth.registerStatus === "success" &&
+      toast.success(
+        `${auth.username}, su registro ha sido exitoso, se ha iniciado su sesión`,
+        {
+          position: "bottom-right",
+          autoClose: 6000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        }
+      );
+  }, [auth.registerStatus, auth.username]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

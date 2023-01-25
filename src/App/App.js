@@ -15,41 +15,50 @@ import { MiPerfil } from "../components/MiPerfil/MiPerfil";
 import { Footer } from "../components/Footer/Footer";
 import { Default } from "../components/PageNotFound/Default";
 
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 import "./App.css";
 
 function App() {
   return (
-    <PayPalScriptProvider
-      options={{
-        "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
-        components: "buttons",
-        currency: "USD",
-      }}
-    >
-      <div className="App">
-        <CssBaseline />
-        <Header />
-        <div className="content-wrap">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/listado-de-productos"
-              element={<ListadoDeProductos />}
-            />
-            <Route path="/producto-individual-details" element={<Details />} />
-            <Route path="/cart-checkout" element={<CartCheckout />} />
-            <Route
-              path="/registro-de-usuario"
-              element={<RegistroDeUsuario />}
-            />
-            <Route path="/inicio-de-sesion" element={<InicioDeSesion />} />
-            <Route path="/mi-perfil" element={<MiPerfil />} />
-            <Route path="*" element={<Default />} />
-          </Routes>
+    <>
+      <PayPalScriptProvider
+        options={{
+          "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
+          components: "buttons",
+          currency: "USD",
+        }}
+      >
+        <div className="App">
+          <CssBaseline />
+          <Header />
+          <div className="content-wrap">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/listado-de-productos"
+                element={<ListadoDeProductos />}
+              />
+              <Route
+                path="/producto-individual-details"
+                element={<Details />}
+              />
+              <Route path="/cart-checkout" element={<CartCheckout />} />
+              <Route
+                path="/registro-de-usuario"
+                element={<RegistroDeUsuario />}
+              />
+              <Route path="/inicio-de-sesion" element={<InicioDeSesion />} />
+              <Route path="/mi-perfil" element={<MiPerfil />} />
+              <Route path="*" element={<Default />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </PayPalScriptProvider>
+      </PayPalScriptProvider>
+      <ToastContainer />
+    </>
   );
 }
 

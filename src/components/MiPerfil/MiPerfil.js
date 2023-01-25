@@ -29,6 +29,7 @@ const MiPerfil = () => {
   theme = responsiveFontSizes(theme);
 
   let { status, updateUserProfile } = useContext(ProductContext);
+
   return (
     <Box
       sx={{
@@ -50,7 +51,7 @@ const MiPerfil = () => {
                 pb: "40px",
               }}
             >
-              Hola! {auth.username}
+              Hola, {auth.username}!
             </Typography>
             <Typography
               component="h3"

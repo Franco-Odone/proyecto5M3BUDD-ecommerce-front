@@ -21,6 +21,7 @@ const Home = () => {
 
   return (
     <Box
+      className="homeBox"
       sx={{
         height: "100vh",
         display: "flex",
@@ -29,7 +30,16 @@ const Home = () => {
         alignItems: "center",
       }}
     >
-      <Container maxWidth="sm">
+      <Container
+        maxWidth="sm"
+        sx={{
+          backgroundColor: "#0288d1dd",
+          padding: "5px 15px 15px 15px",
+          borderRadius: "5px",
+          margin: "auto",
+          width: "90%",
+        }}
+      >
         <ThemeProvider theme={theme}>
           <Typography
             component="h1"

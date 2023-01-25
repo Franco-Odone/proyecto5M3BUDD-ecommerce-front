@@ -4,6 +4,7 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  Grid,
   Link,
   Avatar,
   Button,
@@ -18,19 +19,34 @@ import {
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-import { loadUser, loginUser } from "../../slicesDirectory/authSlice";
+import { toast } from "react-toastify";
 
-const theme = createTheme();
+import { loadUser, loginUser } from "../../slicesDirectory/authSlice";
 
 // Login
 const InicioDeSesion = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
+  const theme = createTheme();
 
   useEffect(() => {
     auth._id && navigate("/cart-checkout");
   }, [auth._id, navigate]);
+
+  useEffect(() => {
+    auth.loginStatus === "success" &&
+      toast.success("Sesión iniciada", {
+        position: "bottom-right",
+        autoClose: 6000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+  }, [auth.loginStatus]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -77,46 +93,52 @@ const InicioDeSesion = () => {
               alignItems: "center",
             }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              autoComplete="off"
-              autoFocus
-              InputLabelProps={{
-                style: {
-                  color: "#000000",
-                  fontWeight: "500",
-                },
-              }}
-              sx={{
-                bgcolor: "#ffffff",
-                borderRadius: "5px",
-              }}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Contraseña"
-              type="password"
-              id="password"
-              autoComplete="off"
-              InputLabelProps={{
-                style: {
-                  color: "#000000",
-                  fontWeight: "500",
-                },
-              }}
-              sx={{
-                bgcolor: "#ffffff",
-                borderRadius: "5px",
-              }}
-            />
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  name="email"
+                  autoComplete="off"
+                  autoFocus
+                  InputLabelProps={{
+                    style: {
+                      color: "#000000",
+                      fontWeight: "500",
+                    },
+                  }}
+                  sx={{
+                    bgcolor: "#ffffff",
+                    borderRadius: "5px",
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Contraseña"
+                  type="password"
+                  id="password"
+                  autoComplete="off"
+                  InputLabelProps={{
+                    style: {
+                      color: "#000000",
+                      fontWeight: "500",
+                    },
+                  }}
+                  sx={{
+                    bgcolor: "#ffffff",
+                    borderRadius: "5px",
+                  }}
+                />
+              </Grid>
+            </Grid>
             <Button
               type="submit"
               fullWidth
