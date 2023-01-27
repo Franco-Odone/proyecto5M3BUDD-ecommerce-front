@@ -121,7 +121,7 @@ const RegistroDeUsuario = () => {
                   id="email"
                   label="Email"
                   name="email"
-                  autoComplete="off"
+                  autoComplete="email"
                   InputLabelProps={{
                     style: {
                       color: "#000000",

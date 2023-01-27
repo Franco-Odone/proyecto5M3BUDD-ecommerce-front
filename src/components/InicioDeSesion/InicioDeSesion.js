@@ -29,7 +29,7 @@ const InicioDeSesion = () => {
   const theme = createTheme();
 
   useEffect(() => {
-    auth._id && navigate("/cart-checkout");
+    auth._id && navigate("/mi-perfil");
   }, [auth._id, navigate]);
 
   useEffect(() => {
@@ -100,7 +100,7 @@ const InicioDeSesion = () => {
                   id="email"
                   label="Email"
                   name="email"
-                  autoComplete="off"
+                  autoComplete="email"
                   autoFocus
                   InputLabelProps={{
                     style: {

@@ -38,23 +38,29 @@ const ListadoDeProductos = () => {
                 fontWeight: "500",
                 color: "#ffc622",
                 pt: "40px",
-                pb: "40px",
+                pb: "20px",
               }}
             >
               Productos
             </Typography>
             <Typography
               component="h3"
-              variant="h6"
+              variant="h5"
               align="center"
               sx={{
-                color: "#ffc622",
+                color: "#ffffff",
+                fontWeight: "500",
+                backgroundColor: "#0288d1dd",
+                padding: "15px 15px",
+                borderRadius: "5px",
+                margin: "auto",
+                width: { xs: "90%", md: "fit-content" },
               }}
             >
               *Para ver detalles del producto hacer click en la imágen*
             </Typography>
           </ThemeProvider>
-          <Container sx={{ py: 0 }} maxWidth="md">
+          <Container sx={{ py: 0, mt: "15px" }} maxWidth="md">
             <Grid container spacing={4}>
               {copiaStoreProducts.map((product) => (
                 <Grid item key={product._id} xs={12} sm={6} md={4}>

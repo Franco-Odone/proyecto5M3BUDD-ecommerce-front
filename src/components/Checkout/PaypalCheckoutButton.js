@@ -8,9 +8,7 @@ import { ProductContext } from "../context/ProductContext";
 
 const PaypalCheckoutButton = (props) => {
   let { setUpdateUserProfile } = useContext(ProductContext);
-
   const [total, setTotal] = useState(props.cartTotal);
-
   const navigate = useNavigate();
 
   useEffect(() => {

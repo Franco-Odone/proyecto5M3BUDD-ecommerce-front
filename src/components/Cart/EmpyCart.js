@@ -29,8 +29,25 @@ const EmptyCart = () => {
               fontWeight: "500",
               color: "#ffc622",
             }}
+            gutterBottom
           >
-            {"El carro de compras está vacío :("}
+            Carro de compras
+          </Typography>
+          <Typography
+            component="h2"
+            variant="h4"
+            align="center"
+            sx={{
+              color: "#ffffff",
+              fontWeight: "500",
+              backgroundColor: "#0288d1dd",
+              padding: "15px 15px",
+              borderRadius: "5px",
+              margin: "auto",
+              width: "fit-content",
+            }}
+          >
+            {"No hay productos en el carro aún..."}
           </Typography>
         </ThemeProvider>
       </Container>
