@@ -36,6 +36,7 @@ const ProductoIndividual = (props) => {
           component="img"
           sx={{
             objectFit: "cover",
+            height: { xs: "16em", md: "14em" },
           }}
           image={require("../../img/" + img + ".png")}
           alt="product"
