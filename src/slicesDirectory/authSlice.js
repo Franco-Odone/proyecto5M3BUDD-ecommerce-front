@@ -8,10 +8,8 @@ const initialState = {
   username: "",
   email: "",
   _id: "",
-  // Creación de usuario-registro
   registerStatus: "",
   registerError: "",
-  // Login
   loginStatus: "",
   loginError: "",
   userLoaded: false,
@@ -37,11 +35,14 @@ export const registerUser = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     try {
       // El token es una referencia (un identificador) que regresa a los datos sensibles a través de un sistema de tokenización
-      const resToken = await axios.post("http://localhost:3001/users", {
-        username: values.username,
-        email: values.email,
-        password: values.password,
-      });
+      const resToken = await axios.post(
+        "https://proyecto5-m3-budd-ecommerce-back.vercel.app/users",
+        {
+          username: values.username,
+          email: values.email,
+          password: values.password,
+        }
+      );
 
       localStorage.setItem("token", resToken.data.token);
 
@@ -62,10 +63,13 @@ export const loginUser = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     try {
       // El token es una referencia (un identificador) que regresa a los datos sensibles a través de un sistema de tokenización
-      const resToken = await axios.post("http://localhost:3001/auth/login", {
-        email: values.email,
-        password: values.password,
-      });
+      const resToken = await axios.post(
+        "https://proyecto5-m3-budd-ecommerce-back.vercel.app/auth/login",
+        {
+          email: values.email,
+          password: values.password,
+        }
+      );
 
       localStorage.setItem("token", resToken.data.token);
 
@@ -126,7 +130,6 @@ const authSlice = createSlice({
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
       // cuándo el reducer está fulfilled en el payload viene el token
-      console.log(action);
       if (action.payload) {
         const user = jwtDecode(action.payload);
         return {
@@ -140,7 +143,6 @@ const authSlice = createSlice({
       } else return state;
     });
     builder.addCase(registerUser.rejected, (state, action) => {
-      console.log(action);
       return {
         ...state,
         registerStatus: "rejected",
@@ -165,7 +167,6 @@ const authSlice = createSlice({
       } else return state;
     });
     builder.addCase(loginUser.rejected, (state, action) => {
-      console.log(action);
       return {
         ...state,
         loginStatus: "rejected",

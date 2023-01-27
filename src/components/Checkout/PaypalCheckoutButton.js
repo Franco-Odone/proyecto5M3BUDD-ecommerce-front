@@ -39,8 +39,6 @@ const PaypalCheckoutButton = (props) => {
       `Transacción completada a nombre de: ${ownerOrder} (titular cuenta PayPal).`
     );
 
-    // Call backend function to fulfill order
-
     props.clearCart();
     navigate("/mi-perfil");
 

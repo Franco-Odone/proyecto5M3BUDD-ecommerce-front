@@ -98,7 +98,6 @@ const Details = () => {
                     }}
                     disabled={inCart}
                     onClick={() => {
-                      console.log("añadido al carro");
                       addToCart(_id);
                     }}
                   >

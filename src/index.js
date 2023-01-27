@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
-// // Se puede cambiar el nombre ya que el default export es en realidad un reducer
+// Se puede cambiar el nombre ya que el default export es en realidad un reducer
 import authReducer, { loadUser } from "./slicesDirectory/authSlice";
 import productsReducer, {
   productsFetch,
@@ -24,6 +24,7 @@ const store = configureStore({
   },
 });
 
+// Es una función que permite lanzar acciones (actions) al store, con la intención de afectar el estado.
 store.dispatch(productsFetch());
 store.dispatch(loadUser(null));
 // store.dispatch(logoutUser(null));

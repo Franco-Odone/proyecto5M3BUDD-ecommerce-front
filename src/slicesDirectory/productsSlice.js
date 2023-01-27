@@ -9,7 +9,9 @@ const initialState = {
 export const productsFetch = createAsyncThunk(
   "products/productsFetch",
   async () => {
-    const response = await axios.get("http://localhost:3001/products");
+    const response = await axios.get(
+      "https://proyecto5-m3-budd-ecommerce-back.vercel.app/products"
+    );
     return response?.data;
   }
 );

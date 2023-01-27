@@ -30,7 +30,6 @@ const ProductoIndividual = (props) => {
         to="/producto-individual-details"
         onClick={() => {
           props.handleDetails(_id);
-          // localStorage.setItem("ProductDetailId", _id);
         }}
       >
         <CardMedia
@@ -68,7 +67,6 @@ const ProductoIndividual = (props) => {
             }}
             disabled={inCart}
             onClick={() => {
-              console.log("añadido al carro");
               props.addToCart(_id);
             }}
           >

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -16,7 +15,6 @@ import {
   createTheme,
   ThemeProvider,
 } from "@mui/material";
-
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import { toast } from "react-toastify";
@@ -79,7 +77,7 @@ const InicioDeSesion = () => {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h2" variant="h5">
             Iniciar Sesión
           </Typography>
           <Box

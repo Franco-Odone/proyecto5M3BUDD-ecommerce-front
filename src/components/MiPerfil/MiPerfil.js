@@ -64,7 +64,7 @@ const MiPerfil = () => {
               }}
             >
               {updateUserProfile.length === 0
-                ? "Aún no has comprado nada :("
+                ? "Cuándo hagas una compra tu producto va a aparecer acá:"
                 : "Productos comprados:"}
             </Typography>
           </ThemeProvider>
