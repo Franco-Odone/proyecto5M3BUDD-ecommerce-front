@@ -36,7 +36,7 @@ export const registerUser = createAsyncThunk(
     try {
       // El token es una referencia (un identificador) que regresa a los datos sensibles a través de un sistema de tokenización
       const resToken = await axios.post(
-        "https://proyecto5-m3-budd-ecommerce-back.vercel.app/users",
+        `${process.env.REACT_APP_BACKEND}/users`,
         {
           username: values.username,
           email: values.email,
@@ -64,7 +64,7 @@ export const loginUser = createAsyncThunk(
     try {
       // El token es una referencia (un identificador) que regresa a los datos sensibles a través de un sistema de tokenización
       const resToken = await axios.post(
-        "https://proyecto5-m3-budd-ecommerce-back.vercel.app/auth/login",
+        `${process.env.REACT_APP_BACKEND}/auth/login`,
         {
           email: values.email,
           password: values.password,
